@@ -1,0 +1,29 @@
+﻿@model CategoryDto
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h1>Kategori Güncelleme</h1>
+
+<!--
+
+    asp.net core'da asp-validation-summary,asp-action gibi tag helper'ler ile dto ila client'ları baglayabiliriyoruz.'
+-->
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Update">
+            <!--All dersek tüm hataları asagidaki div'de gosterir,ModelOnly dersek sadece model bazlı hataları gosterir-->
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name">Kategori İsmi</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span><!--yukarıda tanımlanan DTOdaki Name variable'da verilen Error'u validation-for yaparak client tarafında belitiyoruz-->
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Güncelle" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>

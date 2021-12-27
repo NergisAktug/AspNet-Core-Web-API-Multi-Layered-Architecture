@@ -1,15 +1,16 @@
-﻿using DotnetNLayerProject.Core.Repositories;
+﻿/*using DotnetNLayerProject.Core.Repositories;
 using DotnetNLayerProject.Core.Services;
 using DotnetNLayerProject.Core.UnitOfWorks;
 using DotnetNLayerProject.Data;
 using DotnetNLayerProject.Data.Repositories;
 using DotnetNLayerProject.Data.UnitOfWorks;
-using DotnetNLayerProject.Service.Services;
+using DotnetNLayerProject.Service.Services;*/
+using DotnetNLayerProject.Web.ApiService;
 using DotnetNLayerProject.Web.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.EntityFrameworkCore;
+//using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -32,9 +33,15 @@ namespace DotnetNLayerProject.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpClient<CategoryApiService>(opt =>
+            {
+                opt.BaseAddress = new Uri(Configuration["baseUrl"]);
+            
+            });
+             
             services.AddScoped<NotFoundFilter>();//NotFoundFilter attribute olarak kullanabilmek için bunu startup.cs'de Generic olarak veilmesi gerekiyor
             services.AddAutoMapper(typeof(Startup));
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+           /* services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(IService<>), typeof(Service.Services.Service<>));//Service ismi hem namespace'in ismi hemde class'ın ismi
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IProductService, ProductService>();
@@ -45,7 +52,7 @@ namespace DotnetNLayerProject.Web
                 options.UseSqlServer(Configuration["ConnectionStrings:SqlConStr"].ToString(), O => {
                     O.MigrationsAssembly("DotnetNLayerProject.Data");
                 });
-            });
+            });*/
 
             services.AddControllersWithViews();
         }

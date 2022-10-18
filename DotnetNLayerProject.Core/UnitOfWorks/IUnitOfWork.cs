@@ -8,7 +8,7 @@ namespace DotnetNLayerProject.Core.UnitOfWorks
 {
    public interface IUnitOfWork
     {
-        IProductRepository Products { get;}//Best Pragtices açısından Repositoryler burada cagrilir
+        IProductRepository Products { get;}//Best Practices açısından Repositoryler burada cagrilir
         ICategoryRepository categories { get;}
         Task CommitAsync();//İmplemente edildigi zaman Entity Framework tarafında saveChange methodunu cagiracak.
         void Commit();
